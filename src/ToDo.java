@@ -9,7 +9,6 @@ class UserChoice{
     BufferedReader br ;
 
     public void menu()throws IOException {
-        do {
             br = new BufferedReader(new InputStreamReader(System.in));
             System.out.println("Press 1 To Add Task");
             System.out.println("Press 2 To Remove Task");
@@ -17,11 +16,19 @@ class UserChoice{
             System.out.println("Press 4 To Print Task");
             choice = Integer.parseInt(br.readLine());
             logic();
-            System.out.println("Do you want to continue");
+
+            Ask();
+            menu();
+    }
+
+    public void Ask() throws IOException{
+        do {
+            System.out.println("Do You Want To Continue");
             option=(char) br.read();
+            break;
         }
+
         while (option=='y'||option=='Y');
-        menu();
     }
 
     public void logic()throws IOException{
@@ -75,7 +82,7 @@ class UserChoice{
         for (String str : linkedlist){
             System.out.println(str);
         }
-        menu();
+        Ask();
     }
 
 }
