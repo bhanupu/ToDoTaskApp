@@ -2,33 +2,29 @@ import java.util.LinkedList;
 import java.io.*;
 
 class UserChoice{
-    int choice,size,item,replace;
-    String update;
+    int choice,size,item,replace,midadd,midremove;
+    String update,firstadd,midelement;
     char option;
     LinkedList<String> linkedlist = new LinkedList<String>();
     BufferedReader br ;
 
     public void menu()throws IOException {
-            br = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Press 1 To Add Task");
-            System.out.println("Press 2 To Remove Task");
-            System.out.println("Press 3 To Modify Task");
-            System.out.println("Press 4 To Print Task");
-            choice = Integer.parseInt(br.readLine());
-            logic();
-
-            Ask();
-            menu();
-    }
-
-    public void Ask() throws IOException{
-        do {
-            System.out.println("Do You Want To Continue");
-            option=(char) br.read();
-            break;
-        }
-
-        while (option=='y'||option=='Y');
+       do{
+        br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Press 1 To Add Task");
+        System.out.println("Press 2 To Add Task At First");
+        System.out.println("Press 3 To Add Task At Middle");
+        System.out.println("Press 4 To Remove Task");
+        System.out.println("Press 5 To Remove Task From Middle");
+        System.out.println("Press 6 To Remove Task From Last");
+        System.out.println("Press 7 To Modify Task");
+        System.out.println("Press 8 To Print Task");
+        choice = Integer.parseInt(br.readLine());
+        logic();
+           System.out.println("Do You Want To Continue");
+           option=(char) br.read();
+       }
+       while (option=='y'||option=='Y');
     }
 
     public void logic()throws IOException{
@@ -36,15 +32,31 @@ class UserChoice{
             case 1:
                 Add();
                 break;
+
             case 2:
-                Remove();
+                FirstAdd();
                 break;
 
             case 3:
+                MiddleAdd();
+                break;
+            case 4:
+                Remove();
+                break;
+
+            case 5:
+                MiddleRemove();
+                break;
+
+            case 6:
+                LastRemove();
+                break;
+
+            case 7:
                 Modify();
                 break;
 
-            case 4:
+            case 8:
                 Print();
         }
     }
@@ -61,10 +73,36 @@ class UserChoice{
 
     }
 
+    public void FirstAdd() throws IOException{
+        System.out.println("Enter the task to add at first");
+        firstadd = br.readLine();
+        linkedlist.addFirst(firstadd);
+    }
+
+    public void MiddleAdd() throws IOException{
+        System.out.println("Enter the index number to add task");
+        midadd = Integer.parseInt(br.readLine());
+        System.out.println("Enter the task");
+        midelement = br.readLine();
+        linkedlist.add(midadd,midelement);
+    }
+
     public void Remove() throws IOException{
         System.out.println("Which Task You Want The Remove");
         item = Integer.parseInt(br.readLine());
-        linkedlist.remove(item);
+        System.out.print(linkedlist.get(item));
+        linkedlist.remove();
+        System.out.println(" Has Been Removed");
+    }
+
+    public void MiddleRemove() throws IOException{
+        System.out.println("Enter the index number to remove task");
+        midremove = Integer.parseInt(br.readLine());
+        linkedlist.remove(midremove);
+    }
+
+    public void LastRemove(){
+        linkedlist.removeLast();
     }
 
     public void Modify() throws IOException{
@@ -82,8 +120,9 @@ class UserChoice{
         for (String str : linkedlist){
             System.out.println(str);
         }
-        Ask();
     }
+
+
 
 }
 
